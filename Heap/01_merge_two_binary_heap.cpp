@@ -32,7 +32,7 @@ public:
             ans.push_back(i);
         for (auto i : b)
             ans.push_back(i);
-        // build heap using merge array
+       
         int size = ans.size();
         for (int i = size / 2 - 1; i >= 0; i--)
         {

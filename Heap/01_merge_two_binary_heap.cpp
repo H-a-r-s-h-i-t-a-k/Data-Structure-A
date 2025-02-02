@@ -24,7 +24,7 @@ public:
     }
     vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m)
     {
-        // your code here
+        ///// your code here
         // merge both array into one
         vector<int> ans;
 
@@ -32,7 +32,7 @@ public:
             ans.push_back(i);
         for (auto i : b)
             ans.push_back(i);
-        // build heap using merge array
+       
         int size = ans.size();
         for (int i = size / 2 - 1; i >= 0; i--)
         {

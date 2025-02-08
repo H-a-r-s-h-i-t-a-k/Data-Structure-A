@@ -4,15 +4,11 @@ public:
     int isBitSet(int N)
     {
         // code here
-        while (N)
-        {
-            if (N & 1 != 1)
-            {
-                return 0;
-            }
-            N = N >> 1;
-        }
+        if (N == 0)
+            return 0;
+        if (N & (N + 1) == 0)
+            return 1;
 
-        return 1;
+        return 0;
     }
 };

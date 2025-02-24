@@ -1,0 +1,1 @@
+Count of subarrays of size K having at least one pair with absolute difference divisible by K - 1

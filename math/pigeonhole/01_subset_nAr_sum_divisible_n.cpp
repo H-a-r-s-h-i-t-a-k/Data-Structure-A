@@ -1,0 +1,1 @@
+Find a non empty subset in an array of N integers such that sum of elements of subset is divisible by N

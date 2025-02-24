@@ -1,0 +1,1 @@
+Construct String with given frequency and minimum continuous occurrence of a letter

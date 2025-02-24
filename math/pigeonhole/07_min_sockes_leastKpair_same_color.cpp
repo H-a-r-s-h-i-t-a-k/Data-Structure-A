@@ -1,0 +1,1 @@
+Minimum number of socks required to picked to have at least K pairs of the same color

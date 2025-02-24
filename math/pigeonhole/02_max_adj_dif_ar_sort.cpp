@@ -1,0 +1,1 @@
+Maximum adjacent difference in an array in its sorted form

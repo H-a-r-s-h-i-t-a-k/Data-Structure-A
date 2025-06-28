@@ -24,10 +24,21 @@ class Solution
 public:
   vector<int> maxSubsequence(vector<int> &nums, int k)
   {
+    // step1 create min heap of k size pair<data,index>
+    // step2 insert element in heap upto k  no of element  uisng push and pop
+    // step3 fetch index part of heap element  in vectpr
+    // step4 sort indexes to keep sequence
+    // step5 fetch element using index throught original array
+
+
+    
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minheap;
+    // step1 create min heap of k size pair<data,index>
     int n = nums.size();
     for (int i = 0; i < n; i++)
-    {
+    { 
+      // step2 insert element in heap upto k  no of element  uisng push and pop
+     
       if (minheap.size() < k)
       {
         minheap.push({nums[i], i});
@@ -41,6 +52,8 @@ public:
         }
       }
     }
+    // step3 fetch index part of heap element  in vectpr
+    
     vector<int> ans;
     while (!minheap.empty())
     {
@@ -48,7 +61,9 @@ public:
       minheap.pop();
       ans.push_back(top.second);
     }
+    // step4 sort indexes to keep sequence
     sort(ans.begin(), ans.end());
+    // step5 fetch element using index throught original array
     for (int i = 0; i < k; i++)
     {
       ans[i] = nums[ans[i]];

@@ -3,7 +3,10 @@
     "vector": "cpp",
     "xstring": "cpp",
     "xutility": "cpp",
-    "xlocale": "cpp"
+    "xlocale": "cpp",
+    "algorithm": "cpp",
+    "limits": "cpp",
+    "utility": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

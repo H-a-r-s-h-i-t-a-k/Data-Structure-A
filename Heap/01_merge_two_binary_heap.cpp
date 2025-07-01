@@ -53,14 +53,12 @@ void maxHeapify(vector<int> &arr, int n, int ind)
     int l = 2 * ind + 1;
     int r = 2 * ind + 2;
 
+    max = ind;
     if (l < n && arr[ind] < arr[l])
     {
         max = l;
     }
-    else
-    {
-        max = ind;
-    }
+    
     if (r < n && arr[ind] < arr[r])
     {
         max = r;

@@ -1,100 +1,123 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-struct Node
+
+
+class TrieNode
 {
-    Node *links[28];
-    bool flag = false;
-    bool containsKey(char ch)
+public:
+    char data;
+    TrieNode *children[26];
+    int isTerminal;
+
+    TrieNode(char ch)
     {
-        return (links[ch - 'a'] != NULL);
-    }
-    void put(char ch, Node *node)
-    {
-        links[ch - 'a'] = node;
-    }
-    Node *get(char ch)
-    {
-        return links[ch - 'a'];
-    }
-    void setEnd()
-    {
-        flag = true;
-    }
-    bool isEnd()
-    {
-        return flag;
+        data = ch;
+        for (int i = 0; i < 26; i++)
+        {
+            children[i] = NULL;
+        }
+        isTerminal = 0;
     }
 };
 
 class Trie
 {
-private:
-    Node *root;
-
 public:
-    Trie()
+    TrieNode *root;
+    Trie() { root = new TrieNode('\0'); }
+    void insertUtilsR(TrieNode *&root, string word)
     {
-        root = new Node();
+        // base condition
+        if (word.length() == 0)
+        {
+            root->isTerminal++;
+            return;
+        }
+        int index = word[0] - 'a';
+        TrieNode* child;
+        if (root->children[index] != NULL)
+        {
+            child = root->children[index];
+        }
+        else
+        {
+            child = new TrieNode(word[0]);
+            root->children[index] = child;
+        }
+        insertUtilsR(child, word.substr(1));
     }
+    // void insertUtilsL(TrieNode *&root, string word)
+    // {
+    //     TrieNode *temp = root;
+    //     for (auto &ch : word)
+    //     {
+    //         int index = ch - 'a';
+    //         if (temp->children[index] == nullptr)
+    //         {
+    //             TrieNode *node = new TrieNode(ch);
+                
+    //                 temp->children[index] = node;
+                
 
+    //             }
+    //             temp = temp->children[index];
+    //     }
+    //     temp->isTerminal++;
+    // }
     void insert(string word)
     {
-        Node *node = root;
-        for (int i = 0; i < word.length(); i++)
-        {
-            if (!node->containsKey(word[i]))
-            {
-                node->put(word[i], new Node());
-            }
-            // moves to the reference trie
-            node = node->get(word[i]);
-        }
-        node->setEnd();
+        insertUtilsR(root, word);
+        // insertUtilsL(root, word);
     }
 
-    bool search(string word)
+    int countUtils(TrieNode *&root, string word)
     {
-        Node *node = root;
-        for (int i = 0; i < word.length(); i++)
+        TrieNode *child = root;
+        for (auto &ch : word)
         {
-            if (!node->containsKey(word[i]))
+            int index = ch - 'a';
+            if (child->children[index] == nullptr)
             {
-                return false;
+                return 0;
             }
-            node = node->get(word[i]);
+            child = child->children[index];
         }
-        return node->isEnd();
+        return child->isTerminal;
     }
 
-    bool startsWith(string prefix)
+    int countWordsEqualTo(string word)
     {
-        Node *node = root;
-        for (int i = 0; i < prefix.length(); i++)
-        {
-            if (!node->containsKey(prefix[i]))
-            {
-                return false;
+        return countUtils(root, word);
+    }
+
+    // int countWordsStartingWith(string word) {}
+
+    void erase(string word) 
+    {   TrieNode* temp=root;
+        for(auto& ch:word){
+            int index=ch-'a';
+            if(temp->children[index]==nullptr){
+                return;
             }
-            node = node->get(prefix[i]);
+            temp=temp->children[index];
         }
-        return true;
+        temp->isterminal=0;
     }
 };
-int main()
-{
-    Trie trie;
-    cout << "Inserting words: Replicater, Replicating, Replisating, Replicatike" << endl;
-    trie.insert("Replicater");
-    trie.insert("Replicating");
-    trie.insert("Replisating");
-    trie.insert("Replicate");
 
-    cout << "Search if Replicatoring exists in trie: " << (trie.search("Replicatoring") ? "True" : "False") << endl;
 
-    cout << "Search if Replicate exists in trie: " << (trie.search("Replicate") ? "True" : "False") << endl;
 
-    cout << "If words is Trie start with Repli: " << (trie.startsWith("Repli") ? "True" : "False") << endl;
+int main(){
+    Trie* root=new Trie();
+    root->insert("apple");
+    root->insert("apple"); 
+ 
 
-    return 0;
+    root->insert("apple");
+    root->insert("applee");
+    root->insert("applllee");
+   cout<< root->countWordsEqualTo("apple")<<endl;
+   cout << root->countWordsEqualTo("applee")<<endl;
+   cout << root->countWordsEqualTo("applllee");
 }

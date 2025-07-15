@@ -8,7 +8,8 @@
     "limits": "cpp",
     "utility": "cpp",
     "ratio": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "span": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

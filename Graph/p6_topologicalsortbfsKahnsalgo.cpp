@@ -1,53 +1,54 @@
-////////////////////////dfs/////////////////////
-#include <iostream>
-#include <unordered_map>
-#include <list>
-#include <stack>
-#include <vector>
-
-void topo(int node, unordered_map<int, list<int>> &adj, unordered_map<int, bool> &visited, stack<int> &stk)
+class Solution
 {
-  visited[node] = 1;
-  for (auto &n : adj[node])
+public:
+  vector<int> topoSort(int V, vector<vector<int>> &edges)
   {
-    if (!visited[n])
+    // code here
+    unordered_map<int, list<int>> adj;
+    for (auto &item : edges)
     {
-      topo(n, adj, visited, stk);
+      int u = item[0];
+      int v = item[1];
+
+      adj[u].push_back(v);
     }
-  }
-  stk.push(node);
-}
 
-vector<int> topologicalSort(vector<vector<int>> &graph, int edges, int nodes)
-{
-  // Write your code here!
-  unordered_map<int, list<int>> adj;
-
-  for (auto &ele : graph)
-  {
-    int u = ele[0];
-    int v = ele[1];
-    adj[u].push_back(v);
-  }
-
-  unordered_map<int, bool> visited;
-
-  vector<int> ans;
-  stack<int> stk;
-
-  for (int i = 0; i < nodes; i++)
-  {
-    if (!visited[i])
+    // int n=edges.size();
+    vector<int> indegree(V, 0);
+    for (auto &ele : adj)
     {
-      topo(i, adj, visited, stk);
+      for (auto &el : ele.second)
+      {
+        indegree[el]++;
+      }
     }
-  }
+    int root;
+    queue<int> q;
+    vector<int> ans;
+    for (int i = 0; i < V; i++)
+    {
+      if (indegree[i] == 0)
+      {
+        q.push(i);
+      }
+    }
 
-  while (!stk.empty())
-  {
-    ans.push_back(stk.top());
-    stk.pop();
-  }
+    while (!q.empty())
+    {
+      int front = q.front();
+      q.pop();
+      ans.push_back(front);
 
-  return ans;
-}
+      for (auto &ch : adj[front])
+      {
+        indegree[ch]--;
+        if (indegree[ch] == 0)
+        {
+          q.push(ch);
+        }
+      }
+    }
+
+    return ans;
+  }
+};

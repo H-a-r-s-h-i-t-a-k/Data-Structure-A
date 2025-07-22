@@ -15,6 +15,7 @@ public:
     right = nullptr;
   }
 };
+
 Node* buildTreelot(Node* root){
   printf("\nEnter the data parant Element: ");
   int temp=0;

@@ -14,7 +14,43 @@ public:
     left = nullptr;
     right = nullptr;
   }
-};
+};///////////////////optimise////////////
+Solution{
+  public :
+      vector<vector<int>>
+          levelOrder(TreeNode * root){
+              vector<vector<int>> ans;
+if (!root)
+  return ans;
+
+queue<TreeNode *> q;
+q.emplace(root);
+
+while (!q.empty())
+{
+  int size = q.size();
+  vector<int> level;
+  level.reserve(size); // Avoid multiple resizes
+
+  for (int i = 0; i < size; ++i)
+  {
+    TreeNode *node = q.front();
+    q.pop();
+    level.push_back(node->val);
+
+    if (node->left)
+      q.emplace(node->left);
+    if (node->right)
+      q.emplace(node->right);
+  }
+
+  ans.emplace_back(move(level));
+}
+
+return ans;
+}
+}
+;////////////////////////////////////////////////////////////
 void levelOrderTraversal(Node *root)
 {
   

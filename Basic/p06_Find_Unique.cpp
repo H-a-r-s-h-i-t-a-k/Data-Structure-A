@@ -22,3 +22,15 @@ int main()
     cout << singleNumber(nums);
     return 0;
 }
+
+int findUnique(int *arr, int size)
+{
+    int ans = 0;
+    while (size)
+    {
+        size--;
+        ans ^= arr[size];
+    }
+    return ans;
+    // Write your code here
+}

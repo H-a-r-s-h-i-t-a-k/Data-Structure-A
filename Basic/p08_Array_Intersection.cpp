@@ -1,48 +1,25 @@
-#include <iostream>
-#include <vector>
-#include <set>
-#include <algorithm>
-using namespace std;
-
-vector<int> intersectionUnsorted_array(vector<int> &nums1, vector<int> &nums2)
+#include <bits/stdc++.h>
+vector<int> findArrayIntersection(vector<int> &arr1, int n, vector<int> &arr2, int m)
 {
-    set<int> ans;
-    sort(nums1.begin(), nums1.end());
-    sort(nums2.begin(), nums2.end());
     int i = 0, j = 0;
-    while (i < nums1.size() && j < nums2.size())
+    vector<int> ans;
+    while (i < n && j < m)
     {
-        if (nums1[i] == nums2[j])
+        if (arr1[i] < arr2[j])
         {
-
-            ans.insert(nums1[i]);
+            i++;
+        }
+        else if (arr1[i] == arr2[j])
+        {
+            ans.push_back(arr1[i]);
             i++;
             j++;
         }
-        else if (nums1[i] < nums2[j])
-            i++;
         else
+        {
             j++;
+        }
     }
-    vector<int> vc(ans.begin(), ans.end());
-   
-    return vc;
-}
-int main()
-{
-    int t;
-    cin >> t;
-    vector<int> nums1(t), nums2(t);
-    for (int i = 0; i < t; i++)
-    {
-        cin >> nums1[i] >> nums2[i];
-    }
-    vector<int> ans = intersectionUnsorted_array(nums1, nums2);
-    for (int i : ans)
-    {
-        cout << i << "  ";
-    }
-    cout << endl;
-
-    return 0;
+    return ans;
+    // Write your code here.
 }

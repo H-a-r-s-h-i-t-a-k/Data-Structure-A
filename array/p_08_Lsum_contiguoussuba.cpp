@@ -17,3 +17,25 @@ int main()
 
     std::cout << ms;
 }
+class Solution
+{
+public:
+    int maxSubarraySum(vector<int> &arr)
+    {
+        int maxsum = arr[0], curr = arr[0];
+        for (int i = 1; i < arr.size(); i++)
+        {
+            if (curr < 0)
+            {
+                curr = 0;
+            }
+            curr += arr[i];
+            if (maxsum < curr)
+            {
+                maxsum = curr;
+            }
+        }
+        return maxsum;
+        // Code here
+    }
+};

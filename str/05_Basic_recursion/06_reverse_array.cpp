@@ -16,7 +16,7 @@ vector<int> reverseArray(int n, vector<int> &nums)
   return nums;
   // Write your code here.
 }
-
+2222222222222222222222222222222222222
 void solve(int i, int &n, vector<int> &nums, vector<int> &reverse)
 {
   if (i == n)

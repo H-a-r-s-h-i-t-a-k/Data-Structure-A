@@ -9,7 +9,9 @@
     "utility": "cpp",
     "ratio": "cpp",
     "iostream": "cpp",
-    "span": "cpp"
+    "span": "cpp",
+    "deque": "cpp",
+    "string": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

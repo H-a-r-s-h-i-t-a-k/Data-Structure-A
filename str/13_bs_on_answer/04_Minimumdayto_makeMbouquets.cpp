@@ -5,7 +5,7 @@ using namespace std;
 bool isPossible(vector<int>& nums,int day,int B,int size){
   int cnt=0,NoofB=0;
   for(int i=0;i<nums.size();i++){
-    if(nums[i]<=day){
+    if(nums[i]<=nums[day]){
       cnt++;
 
     }else{

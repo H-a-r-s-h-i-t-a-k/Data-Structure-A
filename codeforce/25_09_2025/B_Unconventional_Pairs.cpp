@@ -2,15 +2,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 int solve(vector<int>&nums,int n){
-  int ans=INT_MAX;
+  int ans=0;
   sort(nums.begin(),nums.end());
 
-for(int i=0;i<n;i++){
-  int difmax=0;
-  for(int j=i+1;j<n;j+=1){
-    difmax=max(difmax,abs(nums[i]-nums[j]));
-  }
-  ans=min(ans,difmax);
+for(int i=0;i<n;i+=2){
+  int difmax=(nums[i+1]-nums[i]);
+  
+  ans=max(ans,difmax);
 
 }
 

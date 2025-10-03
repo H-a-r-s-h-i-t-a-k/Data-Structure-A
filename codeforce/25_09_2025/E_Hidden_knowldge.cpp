@@ -1,35 +1,57 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
-long long solve(vector<int>& nums,int n,int k,int l,int r){
-  long long number = 0;
-  int left=0;int right=0;
-  unordered_map<int,int> mp;
+#define int long long
 
-  for(right=0;right<n;right++){
-    mp[nums[right]]++;
-    while(mp.size()>k){
-      mp[nums[left]]--;
-      if(mp[nums[left]]==0){
-        mp.erase(nums[left]);
-      }
-      left++;
+int solve(vector<int> & nums,int n,int k,int l,int r){
+  int ans=0;
+
+  unordered_map<int,int>mp;
+  set<pair<int,int>> st;
+
+  for(int i=0;i<nums.size();i++){
+    int a=nums[i];
+    if(mp.find(a)!=mp.end()){
+      st.erase({mp[a],a});
     }
-     
-      
-      int len=right-left+1;
-      if(len>=l){
-        number+=min(len,r)-l+1;
-      }
-    
-    
-  
+    mp[a]=i;
+    st.insert({mp[a],a});
 
-  
+
+    if(st.size()>k+1){
+      st.erase(st.begin());
+    }
+
+    if(st.size()<k){
+      continue;
+    }
+
+    int low,high;
+    if(st.size()==k){
+      low=i-st.begin()->first +1;
+      high=i+1;
+    }else{
+      low=i-(next(st.begin()))->first +1;
+      high=i-st.begin()->first;
+    }
+    low=max(low,l);
+    high=min(high,r);
+
+    if(low<=high){
+      ans+=high-low+1;
+    }
+
+
+
+
+  }
+
+return ans;
+
+
+
 }
-  return number;
-}
-int main(){
+int32_t main(){
   int t;
   cin>>t;
   while(t--){
@@ -41,7 +63,7 @@ int main(){
     for(int i=0;i<n;i++){
       cin>>nums[i];
     }
-    long long ans = solve(nums, n, k, l, r) - solve(nums, n, k - 1, l, r);
+    long long ans = solve(nums, n, k, l, r) ;
     cout<<ans<<endl;
   }
   return 0;

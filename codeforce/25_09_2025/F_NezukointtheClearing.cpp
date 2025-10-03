@@ -11,25 +11,28 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
 
-long long solve(int h,int d){
-  int curr=0;
-  int itr=1;
-  long long step=0;
-  while(curr!=d){
-    if( (h-itr )>=0){
-      h-=itr;
-      itr++;
-      curr++;
-    }else{
-      h+=1;
-    }
-    step++;
+int solve(int  h,int d){
+  int low=d,high=2*d-1;
+  int ans=2*d;
+  while(low<=high)
+{
+  int mid=low+ (high-low)/2;
+  int x=mid-d+1;
+  int s1=(d/x)*(d/x+1)/2;
+  int s2=(d/x+1)*(d/x+2)/2;
+  int s=(x-d%x)*s1 +(d%x)*s2;
+  if(s<h+ mid-d){
+    ans=mid;
+    high=mid-1;
+  }else{
+    low=mid+1;
   }
-  return step;
-  
 }
-int main(){
+  return ans;
+}
+int32_t main(){
 
   int t;
   cin>>t;
